@@ -1,0 +1,69 @@
+nav ul>li{
+    font-family: 微软雅黑;
+    white-space: nowrap;/*nowrap 	文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。*/
+    font-size: 20px;
+    font-weight: 100;
+    display: block;
+    text-decoration: none;
+    color: whitesmoke;
+    float: left;
+
+}
+nav ul>li>a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    height: 100%;
+    width: 100%;
+}
+nav ul>li:hover{
+    color: white;
+}
+nav ul ul{
+    padding: 0;
+    margin: 0;
+    position: absolute;
+
+    z-index: 1;
+    letter-spacing: 0;
+    list-style-type: none;
+    display: none;
+}
+nav li li{
+    white-space: nowrap;
+    position: relative;
+    float: none;
+    margin: 0;
+    /* padding: 6px 25px 8px;*/
+    display: block;
+    background-color: rgb(51, 51, 51);
+    /*background-color: #398755;*/
+}
+nav li li a {
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: white;
+    margin: 0;
+    padding: 6px 25px 8px;
+    font-family: 华文细黑;
+}
+nav li li:hover{
+    /*background-color: #398755;*/
+    background-color: rgba(51, 51, 51, 0.91);
+    filter: alpha(opacity=75); /*IE滤镜，透明度50%*/
+    -moz-opacity:0.75; /*Firefox私有，透明度50%*/
+    opacity:0.75;/*其他，透明度50%*/;
+
+}
+nav li li a:hover{
+    color: #9d9d9d;
+    text-decoration: none;
+}
+nav li:hover ul {
+    display: block;
+}

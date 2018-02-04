@@ -1,0 +1,108 @@
+.tropes-operate {
+	background-color: white;
+	font-size:18px;
+	height:50px;
+	margin-bottom: 20px;
+}
+.tropes-operate a{
+	padding: 10px 20px;
+	color: #666;
+	line-height: 50px;
+}
+.tropes-operate a:hover{
+	color: #d0492d;
+	text-decoration: none;
+}
+.tropes-context {
+	background-color: white;
+	padding: 20px 30px;
+}
+.tropes-context h2{
+	margin:0px 0px 20px 0px;
+}
+.tropes-basic>p
+{
+    font-size: 16px;
+    text-indent: 2em;
+    padding: 0 60px 0 10px;
+}
+a.edit-button,
+a.edit-button:visited{
+	float:right;
+	background-color: #555555;
+	color:white;
+	padding: 5px 10px;
+    font-weight: normal;
+}
+a.edit-button:hover
+{
+	background-color: #888;
+	color:white;
+	text-decoration: none;
+}
+ul.relate-first
+{
+    padding-left: 10px;
+    font-size: 16px;
+}
+ul.relate-first  li{
+	list-style-type: none;
+    font-weight: normal;
+}
+ul.relate-first  li>h3{
+    font-weight: normal;
+}
+ul.role-info
+{
+    padding: 15px 25px;
+    font-size: 16px;
+}
+ul.role-info  li{
+	list-style-type: none;
+}
+ul.relate-second
+{
+    padding-left: 10px;
+}
+ul.relate-second li>a.relate-detail,
+ul.relate-second li>a.relate-detail:visited,
+ul.relate-second li a.relate-movie,
+ul.relate-second li a.relate-movie:visited
+{
+    font-size: larger;
+    margin-right: 20px;
+}
+ul.relate-second li>a.relate-detail,
+ul.relate-second li>a.relate-detail:visited
+{
+    color: grey;
+}
+ul.relate-second li a.relate-movie,
+ul.relate-second li a.relate-movie:visited
+{
+    font-style: italic;
+    color: black;
+}
+ul.relate-second li>a.relate-detail:hover,
+ul.relate-second li a.relate-movie:hover
+{
+    color:#d0492d;
+    text-decoration: none;
+}
+ul.relate-second li>span
+{
+    font-size: larger;
+    margin-right: 20px;
+    font-style: italic;
+}
+ul.relate-second li>p
+{
+    text-indent: 2em;
+    padding: 10px 60px 10px 20px;
+}
+img.tropes-pic
+{
+    width: 250px;
+    border: 10px solid white;
+    box-shadow: 1px 1px 10px 4px rgba(0,0,0,0.15);
+}
