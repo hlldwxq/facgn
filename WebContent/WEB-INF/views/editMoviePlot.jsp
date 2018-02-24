@@ -3,62 +3,58 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" %>
 <%@include file="header.jsp" %>
-<%@page import="com.bridgePlot.entity.Plot"%>
 <%@page import="com.bridgePlot.entity.MoviePlot"%>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<link rel="stylesheet" href="${ctx}/public/css/bootstrap.css">
+<style>
+    body {
+        padding-top: 100px;
+        background: #f2f2f2;
+    }
+     .modal img {
+         width: 400px;
+         height: 400px;
+     }
+</style>
+<link rel="stylesheet" href="${ctx}/public/css/cropper.min.css">
 <link rel="stylesheet" href="${ctx}/public/css/froala/froala_editor.pkgd.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
 <div class="container">
     <div class="col-md-offset-1 col-md-10 col-sm-12">
         <div class="tropes-context row">
-            <form  name="form" method="post" action="${ctx}/add"  enctype="multipart/form-data" onsubmit="improveSubmit()">
+            <form  name="form" method="post" action="${ctx}/reviseMoviePlot/${plot.absolute_id}"  enctype="multipart/form-data" onsubmit="improveSubmit()">
             <div class="tropes-basic">
-            	<c:if test="${plot!=null}">
-				<input name="edittick" class="hide" type="text" value="${plot.edit_tick}">
-				<input name="absoluteid" class="hide" type="text" value="${plot.absolute_id}">
-				<input name="plotpic" class="hide" type="text" value="${plot.plot_pic}">
-				</c:if>
-                <h2 style="float: right"><small>新增桥段</small></h2>
-				
-                <input name="plotname" class="title-input" type="text" placeholder="输入标题" style="font-size: 36px" value="${plot.plot_name}·${plot.plot_at_movie}">
+                <h2 style="float: right"><small>新增电影桥段</small></h2>
+
+                <input name="plot_name" class="title-input" type="text" placeholder="输入标题" style="font-size: 36px" value="${plot.plot_name}·${plot.plot_at_movie}">
                 <!--之后改进为有限制的控件-->
-                <input name="label" class="title-input" type="text" placeholder="输入类型，“·”号分隔" style="font-size: 30px;color: grey;margin-bottom: 20px" value="${plot.plot_label_1}·${plot.plot_label_2}·${plot.plot_label_3}">
-       
+                <div>
+                    <div class="label-content" label="0">
+                    </div>
+                    <input type="button" value="+" class="title-add" title="添加标签" target=".label-content">
+                    <input id="label" type="text" name="label" style="display: none" value="${plot.label}">
+                </div>
                 <input name="pasttime" class="title-input" type="text" placeholder="输入桥段间隔" style="font-size: 22px;color: grey;margin-bottom: 20px" value="${plot.begin_time}-${plot.end_time}">
                 <div class="col-xs-9 row">
                     <div class="fr-area" id="plotEdit">
-                        <p>
-                            ${plot.plot_content}
-                        </p>
+                        <p>${plot.plot_content}</p>
                     </div>
                 </div>
-                <textarea id="content" class="form-control hide" rows="3"name="content"></textarea>
+                <textarea id="content" class="form-control hide" rows="3"name="plot_content"></textarea>
                 <div class="col-xs-3 row" style="margin-left: 20px;padding-right: 0">
-                    <div class="ycupload-mainbox">
-                        <div style="min-height:1px;line-height:160px;text-align:center;position:relative;" ontouchstart="">
-                            <div class="cover-wrap" style="display:none;position:fixed;left:0;top:0;width:100%;height:100%;background: rgba(0, 0, 0, 0.4);z-index: 1000;text-align:center;">
-                                <div class="" style="width:900px;height:600px;margin:100px auto;background-color:#FFFFFF;overflow: hidden;">
-                                    <div id="clipArea" style="margin:10px;height:520px;"></div>
-                                    <div id="clipBtn" class="submit-button" style="width:120px;height:36px;margin: 0 auto;">保存图片</div>
-                                </div>
+                    <div class="crop-picture">
+                        <div style="min-height:1px;line-height:160px;text-align:center;position:relative;"
+                             ontouchstart="">
+                            <div style='display:table;width:100%;height:320px;box-shadow: 1px 0 2px 2px rgba(0, 0, 0, 0.12);border-top: 2px solid #d0492d;padding: 1px;margin-bottom: 10px;background: url("${ctx}/public/img/selectImg.jpg");background-size:contain;' data-target="#modal" data-toggle="modal">
+                                <span style="display: table-cell; vertical-align: middle; "><img id="view" style='width:100%;' src="${plot.plot_pic}"></span>
                             </div>
-                            <div style='width:100%;height:280px;box-shadow: 1px 0 2px 2px rgba(0, 0, 0, 0.12);border-top: 2px solid #d0492d;padding: 5px;margin-bottom: 10px'>
-                                
-                                <c:if test="${plot!=null}">
-                                	<div id="view" style='width:100%;height:100%;background-image:url("${plot.plot_pic}");'></div>
-                                </c:if>
-                                <c:if test="${plot==null}">
-                                	<div id="view" style='width:100%;height:100%;background-image:url("public/img/tropes-1.png");'></div>
-                                </c:if>
-                                <input id="cutImage" type="text" class="hide" name="cutImage">
-                            </div>
-
-                            <div class="" style="width:100%;height:30px;background-color:#d0492d;color: #FFFFFF;font-size: 14px;text-align:center;line-height:32px;outline:none;position:relative;">
-                                                                                     点击上传封面
-                                <input type="file" id="file" name="image" style="cursor:pointer;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;">
-                                <input id="isNew" name="isNew" class="hide" type="text" value="0">
-                            </div>
-
+                            <input id="cutImage" type="text" class="hide" name="cutImage">
+                            <input id="isNew" name="isNew" class="hide" type="text" value="0">
                         </div>
                     </div>
 
@@ -72,15 +68,43 @@
     </div>
 
 </div>
-<hr>
+<div class="modal fade" id="modal" aria-labelledby="modalLabel" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <label class="modal-title" id="modalLabel">裁剪封面图像</label>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img id="image" src="${plot.plot_pic}" alt="Picture">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class=""
+                     style="width:65%;height:30px;background-color:#d0492d;color: #FFFFFF;font-size: 14px;text-align:center;line-height:32px;outline:none;position:relative;display: inline-block" >
+                    点击上传封面
+                    <input type="file" id="inputImage" name="image" style="cursor:pointer;opacity:0;filter:alpha(opacity=0);width:100%;height:100%;position:absolute;top:0;left:0;" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
 
-<%@include file="foot.jsp" %>
+                </div>
+                <div id="confirmCut" style="width:30%;height:30px;background-color:#d0492d;color: #FFFFFF;font-size: 14px;text-align:center;line-height:32px;outline:none;position:relative;display: inline-block;cursor: pointer">
+                    确定
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <p>&copy;2017 中国传媒大学智能标签实验室</p>
+</footer>
+</div> <!-- /container -->
+<script src="${ctx}/public/js/vendor/jquery.js"></script>
+<script src="${ctx}/public/js/vendor/bootstrap.min.js"></script>
 <script src="${ctx}/public/js/froala/froala_editor.pkgd.min.js"></script>
 <script src="${ctx}/public/js/froala/languages/zh_cn.js"></script>
-<script src="${ctx}/public/js/cover_js/iscroll-zoom.js" type="text/javascript" charset="utf-8"></script>
-<script src="${ctx}/public/js/cover_js/hammer.js" type="text/javascript" charset="utf-8"></script>
-<script src="${ctx}/public/js/cover_js/lrz.all.bundle.js" type="text/javascript" charset="utf-8"></script>
-<script src="${ctx}/public/js/cover_js/jquery.photoClip.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="${ctx}/public/js/cropper/cropper.min.js"></script>
 <script>
     $(document).ready(function () {
         $(document).scroll(function () {
@@ -97,38 +121,103 @@
             heightMin: 280,
             language: 'zh_cn',
         })
-        var clipArea = new bjj.PhotoClip("#clipArea", {
-            size: [300, 400],// 截取框的宽和高组成的数组。默认值为[260,260]
-            outputSize: [300, 400], // 输出图像的宽和高组成的数组。默认值为[0,0]，表示输出图像原始大小
-            //outputType: "jpg", // 指定输出图片的类型，可选 "jpg" 和 "png" 两种种类型，默认为 "jpg"
-            file: "#file", // 上传图片的<input type="file">控件的选择器或者DOM对象
-            view: "#view", // 显示截取后图像的容器的选择器或者DOM对象
-            ok: "#clipBtn", // 确认截图按钮的选择器或者DOM对象
-            loadStart: function () {
-                // 开始加载的回调函数。this指向 fileReader 对象，并将正在加载的 file 对象作为参数传入
-                $('.cover-wrap').fadeIn();
-                console.log("照片读取中");
-            },
-            loadComplete: function () {
-                // 加载完成的回调函数。this指向图片对象，并将图片地址作为参数传入
-                console.log("照片读取完成");
-            },
-            //loadError: function(event) {}, // 加载失败的回调函数。this指向 fileReader 对象，并将错误事件的 event 对象作为参数传入
-            clipFinish: function (dataURL) {
-                // 裁剪完成的回调函数。this指向图片对象，会将裁剪出的图像数据DataURL作为参数传入
-                $('.cover-wrap').fadeOut();
-                $('#view').css('background-size', '100% 100%');
-                $('#isNew').val(1)
-                //console.log(dataURL);
+        $('.title-add').click(function () {
+            labelBox=$($(this).attr('target'));
+            num=labelBox.attr('label')*1+1;
+            label=$('<input class="title-input title-label" type="text" placeholder="输入标签" value="">');
+            label.blur(function () {
+                if($(this).val()=='')
+                {
+                    num=$(this).parent().attr('label')*1;
+                    if(num<=1)
+                        return;
+                    num--;
+                    $(this).parent().attr('label',num)
+                    $(this).remove()
+                    if(num<4)
+                    {
+                        $('.title-add').css({display:'inline-block'});
+                    }
+                }
+            })
+            labelBox.append(label);
+            labelBox.attr('label',num);
+            if(num>=4)
+                $(this).css({display:'none'});
+            label.focus();
+        })
+        var labelContent=$('#label').val().split('·')
+        for(var i=0;i<labelContent.length;i++)
+        {
+            $('.title-add').click();
+            $($('.title-add').attr('target')).children().last().val(labelContent[i])
+        }
+    });
+    $(function () {
+        var $image = $('#image');
+        var cropBoxData;
+        var canvasData;
+        var options={
+            autoCropArea: 0.7,
+            viewMode:2,
+            ready: function () {
+                $image.cropper('setCanvasData', canvasData);
+                $image.cropper('setCropBoxData', cropBoxData);
             }
+        }
+        $('#modal').on('shown.bs.modal', function () {
+            $image.cropper(options);
+        })
+        $('#confirmCut').on('click', function () {
+            cropBoxData = $image.cropper('getCropBoxData');
+            cropPicData = $image.cropper('getData');
+            console.log(cropBoxData)
+            console.log(cropPicData)
+            $('#view').attr('src',$image.cropper('getCroppedCanvas',{}).toDataURL('image/jpeg'))
+            $('button[data-dismiss="modal"]').click()
+            $('#isNew').val(1)
+            //$image.cropper('destroy');
         });
+        // Import image
+        var $inputImage = $('#inputImage');
+
+        if (URL) {
+            $inputImage.change(function () {
+                var files = this.files;
+                var file;
+                if (!$image.data('cropper')) {
+                    return;
+                }
+                if (files && files.length) {
+                    file = files[0];
+                    if (/^image\/\w+$/.test(file.type)) {
+                        var uploadedImageURL = URL.createObjectURL(file);
+                        $image.cropper('destroy').attr('src', uploadedImageURL).cropper(options);
+                        $inputImage.val('');
+                    } else {
+                        window.alert('请选择正确的图片文件');
+                    }
+                }
+            });
+        } else {
+            $inputImage.prop('disabled', true).parent().addClass('disabled');
+        }
     });
     function improveSubmit() {
         //数据验证
         //省略
+        var label='';
+        var allLabel=$('.title-label')
+        for(var i=0;i<allLabel.length;i++)
+        {
+            label+=$(allLabel[i]).val()+(i==allLabel.length-1?'':'·')
+        }
+        $('#label').val(label);
         $('#content').val($('#plotEdit').froalaEditor('html.get'));
-        console.log($('#content').val());
-        var reg=/^url\("(.*)"\)$/
-        $('#cutImage').val($('#view').css('background-image').match(reg)[1])
+        //console.log($('#content').val());
+        $('#cutImage').val($('#view').attr('src'))
+        return true
     }
 </script>
+</body>
+</html>

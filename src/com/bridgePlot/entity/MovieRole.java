@@ -1,8 +1,6 @@
 package com.bridgePlot.entity;
 
-import java.sql.Time;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,14 +12,17 @@ import javax.persistence.Table;
 @Table(name="movie_role")  //h
 public class MovieRole {
 	private int id;
+	private int absolute_id;
 	private String role_name;
+	private String actor;
 	private String role_sex;
 	private String role_age;
 	private String role_race;
 	private String role_country;
 	private String role_profession;
-	private String key_words;
+	private String label;
 	private String role_introduction;
+	private int movie_id;
 	private String role_at_movie;
 	private String role_pic;
 	private int author_id;
@@ -111,15 +112,7 @@ public class MovieRole {
 	public void setRole_country(String role_country) {
 		this.role_country = role_country;
 	}
-	
-	@Column(name="key_words")
-	public String getKey_words() {
-		return key_words;
-	}
-	public void setKey_words(String key_words) {
-		this.key_words = key_words;
-	}
-	
+
 	@Column(name="role_introduction")
 	public String getRole_introduction() {
 		return role_introduction;
@@ -150,6 +143,36 @@ public class MovieRole {
 	}
 	public void setRole_profession(String role_profession) {
 		this.role_profession = role_profession;
+	}
+	
+	@Column(name="movie_id")
+	public int getMovie_id() {
+		return movie_id;
+	}
+	public void setMovie_id(int movie_id) {
+		this.movie_id = movie_id;
+	}
+	
+	@Column(name="actor")
+	public String getActor() {
+		return actor;
+	}
+	public void setActor(String actor) {
+		this.actor = actor;
+	}
+	
+	@Column(name="label")
+	public String getLabel() {
+		return label;
+	}
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	public int getAbsolute_id() {
+		return absolute_id;
+	}
+	public void setAbsolute_id(int absolute_id) {
+		this.absolute_id = absolute_id;
 	}
 	
 }

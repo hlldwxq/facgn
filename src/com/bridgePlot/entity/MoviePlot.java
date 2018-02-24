@@ -18,11 +18,10 @@ public class MoviePlot {
 	private String plot_name;
 	private Time begin_time;
 	private Time end_time;
-	private String plot_label_1;
-	private String plot_label_2;
-	private String plot_label_3;
+	private String label;
 	private String plot_content;
 	private String plot_at_movie;
+	private int movie_id;
 	private String plot_pic;
 	private int author_id;
 	private String author;
@@ -48,28 +47,12 @@ public class MoviePlot {
 		this.plot_name = plot_name;
 	}
 	
-	@Column(name="plot_label_1")
-	public String getPlot_label_1() {
-		return plot_label_1;
+	@Column(name="label")
+	public String getLabel() {
+		return label;
 	}
-	public void setPlot_label_1(String plot_label_1) {
-		this.plot_label_1 = plot_label_1;
-	}
-	
-	@Column(name="plot_label_2")
-	public String getPlot_label_2() {
-		return plot_label_2;
-	}
-	public void setPlot_label_2(String plot_label_2) {
-		this.plot_label_2 = plot_label_2;
-	}
-	
-	@Column(name="plot_label_3")
-	public String getPlot_label_3() {
-		return plot_label_3;
-	}
-	public void setPlot_label_3(String plot_label_3) {
-		this.plot_label_3 = plot_label_3;
+	public void setLabel(String label) {
+		this.label = label;
 	}
 	
 	@Column(name="plot_content")
@@ -151,4 +134,13 @@ public class MoviePlot {
 	public void setAbsolute_id(int absolute_id) {
 		this.absolute_id = absolute_id;
 	}
+	
+	@Column(name="movie_id")
+	public int getMovie_id() {
+		return movie_id;
+	}
+	public void setMovie_id(int movie_id) {
+		this.movie_id = movie_id;
+	}
+
 }

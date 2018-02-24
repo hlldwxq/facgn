@@ -10,22 +10,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity  //h
-@Table(name="movie_role_comment")
+@Table(name="comment_role")
 public class MovieRoleComment {
-	private int comment_id;
+	private int id;
 	private int user_id;
-	private String comment;
-	private Date edit_time;
-	private int like_tick;
+	private int role_id;
+	private String content;
+	private Date date;
+	private int like;
 	
 	@Id
 	@Column(name="id",nullable=false,unique=true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //h 
-	public int getComment_id() {
-		return comment_id;
+	public int getId() {
+		return id;
 	}
-	public void setComment_id(int comment_id) {
-		this.comment_id = comment_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	@Column(name="user_id")
@@ -36,27 +37,35 @@ public class MovieRoleComment {
 		this.user_id = user_id;
 	}
 	
-	@Column(name="comment")
-	public String getComment() {
-		return comment;
+	@Column(name="content")
+	public String getContent() {
+		return content;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	
-	@Column(name="edit_time")
-	public Date getEdit_time() {
-		return edit_time;
-	}
-	public void setEdit_time(Date edit_time) {
-		this.edit_time = edit_time;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
-	@Column(name="like_tick")
-	public int getLike_tick() {
-		return like_tick;
+	@Column(name="date")
+	public Date getDate() {
+		return date;
 	}
-	public void setLike_tick(int like_tick) {
-		this.like_tick = like_tick;
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	@Column(name="like_num")
+	public int getLike() {
+		return like;
+	}
+	public void setLike(int like) {
+		this.like = like;
+	}
+	
+	@Column(name="role_id")
+	public int getRole_id() {
+		return role_id;
+	}
+	public void setRole_id(int role_id) {
+		this.role_id = role_id;
 	}
 }

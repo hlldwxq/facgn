@@ -1,13 +1,9 @@
 package com.bridgePlot.dao;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-
 import com.bridgePlot.entity.User;
 
 
@@ -47,6 +43,22 @@ public class UserDAOIpml implements UserDAO{
 		currentSession().createQuery("delete User where id = ? ")
 	    .setParameter(0,id).executeUpdate();
 
+	}
+
+	@Override
+	public void updatePassword(String newPassword, int userId) {
+		this.currentSession().createQuery("update User as u set u.password = ? where u.id=?")
+							.setParameter(0, newPassword)
+							.setParameter(1,userId)
+							.executeUpdate();
+	}
+
+	@Override
+	public void updateUserName(String userName, int userId) {
+		this.currentSession().createQuery("update User as u set u.username = ? where u.id=?")
+		.setParameter(0, userName)
+		.setParameter(1,userId)
+		.executeUpdate();
 	}
 
 

@@ -39,6 +39,14 @@
 {
     background: #ffffff;
 }
+footer
+{
+    height: 40px;
+    padding: 10px 40px;
+    color: #888;
+    text-align: right;
+    margin-top: 30px;
+}
 .banner
 {
     padding: 100px 0 60px;
@@ -393,6 +401,11 @@
 {
     background: #cc2b31;
 }
+.label-content
+{
+    display: inline-block;
+    margin-bottom: 20px;
+}
 .title-input
 {
     outline: none;
@@ -411,6 +424,41 @@
     border-top: 4px solid #cc2b31;
     background: #eee;
 }
+.title-label
+{
+    width: 160px;
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 30px;
+    color: grey;
+    margin-bottom: 0px;
+}
 .fr-area p{
     font-size: 16px;
+}
+.title-add
+{
+    display: inline-block;
+    font-size: 30px;
+    padding: 0 8px 4px;
+    line-height: 30px;
+    border: 1px solid #d0492d;
+    background: #d0492d;
+    color: white;
+    border-radius: 20px;
+    transition: all .2s;
+}
+.title-add:hover
+{
+    color: #d0492d;
+    background: white;
+}
+.title-add:focus
+{
+    outline: none;
+}
+.title-info
+{
+    display: inline-block;
+    margin-right: 10px;
 }

@@ -21,6 +21,12 @@ public class User {
 	 private Date register_time;
 	 private Date last_login_time;
 	 private Integer edit_tick;
+	 private Integer age;
+	 private String constellation;
+	 private String profession;
+	 private String location;
+	 private String pic;
+	 
 	 @Id
 	 @Column(name="id",nullable=false,unique=true)
 	 @GeneratedValue(strategy = GenerationType.IDENTITY) //h  
@@ -55,29 +61,67 @@ public class User {
 		this.email = email;
 	 }
 	 
-	 @Column(name="register_time",updatable = false)
-	 @Temporal(TemporalType.TIMESTAMP) 
-	 @org.hibernate.annotations.Generated(org.hibernate.annotations.GenerationTime.INSERT)
+	 @Column(name="register_time")
 	 public Date getRegister_time() {
 		return register_time;
 	 }
 	 public void setRegister_time(Date register_time) {
 		this.register_time = register_time;
 	 }
+	 
 	 @Column(name="last_login_time")
-	 @org.hibernate.annotations.Generated(org.hibernate.annotations.GenerationTime.ALWAYS) 
-	 @Temporal(TemporalType.TIMESTAMP)
 	 public Date getLast_login_time() {
 		return last_login_time;
 	 }
 	 public void setLast_login_time(Date last_login_time) {
 		this.last_login_time = last_login_time;
 	 }
+	 
 	 @Column(name="edit_tick")
 	 public Integer getEdit_tick() {
 		return edit_tick;
 	 }
 	 public void setEdit_tick(Integer edit_tick) {
 		this.edit_tick = edit_tick;
+	 }
+	 
+	 @Column(name="age")
+	 public Integer getAge() {
+		return age;
+	 }
+	 public void setAge(Integer age) {
+		this.age = age;
+	 }
+	 
+	 @Column(name="constellation")
+	 public String getConstellation() {
+		return constellation;
+	 }
+	 public void setConstellation(String constellation) {
+		this.constellation = constellation;
+	 }
+	 
+	 @Column(name="profession")
+	 public String getProfession() {
+		return profession;
+	 }
+	 public void setProfession(String profession) {
+		this.profession = profession;
+	 }
+	 
+	 @Column(name="location")
+	 public String getLocation() {
+		return location;
+	 }
+	 public void setLocation(String location) {
+		this.location = location;
+	 }
+	 
+	 @Column(name="pic")
+	 public String getPic() {
+		return pic;
+	 }
+	 public void setPic(String pic) {
+		this.pic = pic;
 	 }
 }

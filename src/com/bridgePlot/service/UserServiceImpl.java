@@ -29,4 +29,14 @@ public class UserServiceImpl implements UserService{
 	public void delete(int id) {
 		uDao.deleteById(id);
 	}
+
+	@Override
+	public void updatePassword(String newPassword, int userId) {
+		uDao.updatePassword(newPassword, userId);
+	}
+
+	@Override
+	public void updateUserName(String userName, int userId) {
+		uDao.updateUserName(userName, userId);
+	}
 }

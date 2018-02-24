@@ -9,4 +9,6 @@ public interface UserDAO {
 	User getId(int id);
 	void save(User u);
 	void deleteById(int id);
+	void updatePassword(String newPassword,int userId);
+	void updateUserName(String userName,int userId);
 }

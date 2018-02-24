@@ -9,22 +9,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity  //h
-@Table(name="movie_plot_comment") 
+@Table(name="comment_movie_plot") 
 public class MoviePlotComment {
-	private int comment_id;
+	private int id;
 	private int user_id;
-	private String comment;
-	private Date edit_time;
-	private int like_tick;
+	private int movie_plot_id;
+	private String content;
+	private Date date;
+	private int like;
 	
 	@Id
-	@Column(name="comment_id",nullable=false,unique=true)
+	@Column(name="id",nullable=false,unique=true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //h  
-	public int getComment_id() {
-		return comment_id;
+	public int getId() {
+		return id;
 	}
-	public void setComment_id(int comment_id) {
-		this.comment_id = comment_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	@Column(name="user_id")
@@ -35,27 +36,35 @@ public class MoviePlotComment {
 		this.user_id = user_id;
 	}
 	
-	@Column(name="comment")
-	public String getComment() {
-		return comment;
+	@Column(name="content")
+	public String getContent() {
+		return content;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	
-	@Column(name="edit_time")
-	public Date getEdit_time() {
-		return edit_time;
-	}
-	public void setEdit_time(Date edit_time) {
-		this.edit_time = edit_time;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
-	@Column(name="like_tick")
-	public int getLike_tick() {
-		return like_tick;
+	@Column(name="date")
+	public Date getDate() {
+		return date;
 	}
-	public void setLike_tick(int like_tick) {
-		this.like_tick = like_tick;
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	@Column(name="like_num")
+	public int getLike() {
+		return like;
+	}
+	public void setLike(int like) {
+		this.like = like;
+	}
+	
+	@Column(name="movie_plot_id")
+	public int getMovie_plot_id() {
+		return movie_plot_id;
+	}
+	public void setMovie_plot_id(int movie_plot_id) {
+		this.movie_plot_id = movie_plot_id;
 	}
 }

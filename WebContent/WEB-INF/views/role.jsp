@@ -7,7 +7,7 @@
     <!-- Example row of columns -->
     <div class="col-md-offset-1 col-md-10 col-sm-12">
         <div class="row tropes-operate">
-                <a href="#">创建新条目</a>
+                <a href="${ctx}/addRole">创建新条目</a>
                 <a href="#">引用</a>
                 <a href="#">分享</a>
         </div>
@@ -15,20 +15,16 @@
     <div class="col-md-offset-1 col-md-10 col-sm-12">
         <div class="row tropes-context">
             <div>
-                <img class="tropes-pic" src="/facgnImg/role/${role.id}.png" align="right"  hspace="50" vspace="50">
+                <img class="tropes-pic" src="${role.role_pic}" align="right"  hspace="50" vspace="50">
                 <h1 style="margin-top: 20px;margin-bottom: 5px;"><strong>${role.role_name}</strong></h1>
-                <a class="edit-button" href="#">编辑</a>
-                <h2 style="color:gray;font-weight: bold;">追逐·战斗</h2>
+                <a class="edit-button" href="${ctx}/reviseRole/${role.absolute_id}">编辑</a>
+                <h2 style="color:gray;font-weight: bold;">${role.role_name}</h2>
                 <p>
                 <ul class="role-info" style=" background-color: #F0F0F0; width:55%;">
-                    <li>出处：${role.role_at_movie}</li>
-                    <li>扮演者：吴京</li>
+                    <li>出处：<a href="${ctx}/movie/${role.movie_id}">${role.role_at_movie}</a></li>
+                    <li>扮演者：${role.actor}</li>
                     <li>身份职业：${role.role_profession}</li>
                     <li>国籍：${role.role_country}</li>
-                    <li>战友：邵兵、史三八、俞飞、板砖</li>
-                    <li>上司：石青松、龙小云</li>
-                    <li>敌人：老猫Tom Cat、敏登</li>
-                    <li>女友：龙小云、RACHEL</li>
                 </ul>
                 </p>
             </div>
@@ -43,57 +39,93 @@
                         <a class="edit-button" href="#">编辑</a>
                         <h2 style="margin-top:30px;">类似角色</h2>
                     </li>
-                    <li class="row">
-                        <div class="col-md-2">
-                            <img src="${ctx}/public/img/wudi.png"   height="100px" width="80px">
-                        </div>
-                        <div class="col-md-10">
-                            <ul class="relate-second">
-                                <li><span>吴迪</span><span>《空天猎》</span><a class="relate-detail" href="#">详情</a></li>
-                                <li>
-                                    天狼中队成员，空军战斗机飞行员，肩负救援人质和联合反恐的双重任务，与敌人在空中开
-                                    展了一场智谋与勇气的极限较量。
-                                </li>
-                            </ul>
-
-                        </div>
-                    </li>
-                    <li class="row">
-                        <div class="col-md-2">
-                            <img src="${ctx}/public/img/yuanlang.png" height="100px" width="80px">
-                        </div>
-                        <div class="col-md-10">
-                            <ul class="relate-second">
-                                <li><span>袁朗</span><span>《士兵突击》</span><a class="relate-detail" href="#">详情</a></li>
-                                <li>
-                                    A大队三中队中队长，军衔为中校。他身怀绝技，通透人性，同时心怀悲悯。
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                    <c:forEach items="${similarRole}" var="otherRole">
+	                    <li class="row">
+	                        <div class="col-md-2">
+	                            <img src="${otherRole.role_pic}"   height="100px" width="80px">
+	                        </div>
+	                        <div class="col-md-10">
+	                            <ul class="relate-second">
+	                                <li><span>${otherRole.role_name}</span><a href="${ctx}/movie/${otherRole.movie_id}"><span>《${otherRole.role_at_movie}》</span></a> <a class="relate-detail" href="${ctx}/movierole/${otherRole.id}">详情</a></li>
+	             					<li>
+	             						${otherRole.role_introduction}
+	                                </li>
+	                            </ul>
+	
+	                        </div>
+	                    </li>
+                    </c:forEach>
                 </ul>
             </div>
         </div>
     </div>
+</div>
+<div class="container">
+    <div class="col-md-offset-1 col-md-10 col-sm-12">
+        <h2>评论</h2>
+        <div id="usercomments">
+           
+        </div>
+        <div class="row tropes-context">
+            <button id="getmore" type="button" class="btn btn-light btn-block" onclick="appendMoreText()">查看更多</button>
+        </div>
+        <div class="row tropes-context">
+            <div class="fr-area" id="plotEdit">
+                <p>
+                </p>
+            </div>
+            <textarea id="content" class="form-control hide" rows="3"name="content"></textarea>
+            <button name="submit" id="submit" class="submit-button" type="submit" onclick="improveSubmit()">提交</button>
+        </div>
     </div>
-    <hr>
-</div> <!-- /container -->
-<script src="js/vendor/jquery.js"></script>
-<script src="js/vendor/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $(document).scroll(function () {
-            var distance=$(document).scrollTop();
-            //console.log(distance);
-            if(distance>=300)
-            {
-            }
-            else
-            {
-            }
-        });
+</div>
 
-    });
+<script src="${ctx}/public/js/vendor/jquery.js"></script>
+<script src="${ctx}/public/js/vendor/bootstrap.min.js"></script>
+<script src="${ctx}/public/js/froala/froala_editor.pkgd.min.js"></script>
+<script src="${ctx}/public/js/froala/languages/zh_cn.js"></script>
+<script>
+	$(document).ready(function () {
+	    $(document).scroll(function () {
+	        var distance = $(document).scrollTop();
+	        //console.log(distance);
+	        if (distance >= 300) {
+	        }
+	        else {
+	        }
+	    });
+	    $('#plotEdit').froalaEditor({
+	        toolbarButtons: ['bold', 'italic', 'underline', '|', 'undo', 'redo'],
+	        pluginsEnabled: ['paragraphFormat', 'align', 'lists'],
+	        heightMin: 150,
+	        language: 'zh_cn',
+	    })
+	});
+	function improveSubmit() {
+	    //数据验证
+	    //省略
+	    $('#content').val($('#plotEdit').froalaEditor('html.get'));
+	    console.log($('#content').val());
+	    $.post("${ctx}/comment/movieRole",//提交接口
+	        {
+	            role_id:${role.id},
+	            content: $('#content').val()//提交信息
+	        },
+	        function(data,status){
+	            alert("评论成功");
+	        });
+	}
+	
+	function appendMoreText() {
+	    $.get('${ctx}/roleComment/${role.id}',function (data,status) {
+	        //console.log(data);
+	        var i;
+	        for(i=0;i<data.length;i++){
+	            commentdiv = '<div class="row tropes-context"> <div class="user-comments"> <div class="col-md-2 column"> <img alt="140x140" src="resource/hmbb.png"/> </div> <div class="col-md-10 column"> <h5>'+data[i].name+'</h5> '+data[i].comment+'<a>点赞</a> </div> <div class="col-md-2 column"> </div> </div> </div>';
+	            $("#usercomments").append(commentdiv);
+	        }
+	    });
+	}
 
 </script>
 </body>

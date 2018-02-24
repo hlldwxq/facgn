@@ -18,4 +18,20 @@ public interface CommentDAO {
 	void saveMoviePlotComment(MoviePlotComment moviePlotComment);
 	void saveMovieRoleComment(MovieRoleComment movieRoleComment);
 	void savePlotComment(PlotComment plotComment);
+
+	void addLikeMoviePlot(int moviePlotCommentId);
+	void addLikeMovieRole(int movieRoleCommentId);
+	void addLikePlot(int PlotCommentId);
+	
+	void reduceLikeMoviePlot(int moviePlotCommentId);
+	void reduceLikeMovieRole(int movieRoleCommentId);
+	void reduceLikePlot(int plotCommentId);
+	
+	List<MoviePlotComment> getMoviePlotCommByPage(int pageNum,int moviePlotId);
+	List<PlotComment> getPlotCommByPage(int pageNum,int plotId);
+	List<MovieRoleComment> getMovieRoleCommByPage(int pageNum,int movieRoleId);
+	
+	int getMoviePlotCommentCountById(int id);
+	int getPlotCommentCountById(int id);
+	int getMovieRoleCommentCountById(int id);
 }

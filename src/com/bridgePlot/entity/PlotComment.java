@@ -9,22 +9,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity  //h
-@Table(name="plot_comment") 
+@Table(name="comment_plot") 
 public class PlotComment {
-	private int comment_id;
+	private int id;
 	private int user_id;
-	private String comment;
-	private Date edit_time;
-	private int like_tick;
+	private int plot_id;
+	private String content;
+	private Date date;
+	private int like;
 
 	@Id
-	@Column(name="comment_id",nullable=false,unique=true)
+	@Column(name="id",nullable=false,unique=true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //h 
-	public int getComment_id() {
-		return comment_id;
+	public int getId() {
+		return id;
 	}
-	public void setComment_id(int comment_id) {
-		this.comment_id = comment_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	@Column(name="user_id")
@@ -35,27 +36,35 @@ public class PlotComment {
 		this.user_id = user_id;
 	}
 	
-	@Column(name="comment")
-	public String getComment() {
-		return comment;
+	@Column(name="plot_id")
+	public int getPlot_id() {
+		return plot_id;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	
-	@Column(name="edit_time")
-	public Date getEdit_time() {
-		return edit_time;
-	}
-	public void setEdit_time(Date edit_time) {
-		this.edit_time = edit_time;
+	public void setPlot_id(int plot_id) {
+		this.plot_id = plot_id;
 	}
 	
-	@Column(name="like_tick")
-	public int getLike_tick() {
-		return like_tick;
+	@Column(name="content")
+	public String getContent() {
+		return content;
 	}
-	public void setLike_tick(int like_tick) {
-		this.like_tick = like_tick;
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	@Column(name="date")
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	@Column(name="like_num")
+	public int getLike() {
+		return like;
+	}
+	public void setLike(int like) {
+		this.like = like;
 	}
 }

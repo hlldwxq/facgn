@@ -12,8 +12,10 @@
         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
             <br> <br>
             <div class="search-group">
-                <input class="form-control search-box" type="text" placeholder="输入桥段、角色或电影名称">
-                <button class="search-button"><span class="glyphicon glyphicon-search"></span></button>
+            	<form method="post" action="${ctx}/search">
+	                <input class="form-control search-box" type="text" name="search" placeholder="输入桥段、角色和电影名称">
+	                <button class="search-button"><span class="glyphicon glyphicon-search"></span></button>
+                </form>
             </div>
 
         </div>
@@ -77,8 +79,9 @@
                 </ul></div>
             <div id="plotRandom" class="control-button"><span class="glyphicon glyphicon-random"></span>随机</div>
             <div class="control-button">关键字：</div>
-            <a href="${ctx}/add"><div class="control-button pull-right"><span class="glyphicon glyphicon-plus"></span>新增桥段</div></a>
-            <div class="control-button pull-right"><span class="glyphicon glyphicon-plus"></span>新增角色</div>
+            <a href="${ctx}/addMoviePlot"><div class="control-button pull-right"><span class="glyphicon glyphicon-plus"></span>电影桥段</div></a>
+            <a href="${ctx}/addPlot"><div class="control-button pull-right"><span class="glyphicon glyphicon-plus"></span>新增桥段</div></a>
+            <a href="${ctx}/addRole"><div class="control-button pull-right"><span class="glyphicon glyphicon-plus"></span>新增角色</div></a>
         </div>
         <div id="plotWrapper" class="waterfall" style="opacity: 0">
             
